@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        .wrap{
+            overflow: hidden;
+        }
+        .container{
+            width: 300vw;
+            display: flex;
+            transition: all 0.6s;
+        }
+        .inner{
+            width: 100vw;
+        }
+        .inner a{
+            display: block;
+        }
+        .inner a img{
+            display: block;
+            width: 100%;
+        }
+        .btnAll{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <ul class="container">
+            <li class="inner"><a href="#"><img src="./img/img_01.jpg" alt="첫번째 이미지"></a></li>
+            <li class="inner"><a href="#"><img src="./img/img_02.jpg" alt="두번째 이미지"></a></li>
+            <li class="inner"><a href="#"><img src="./img/img_03.jpg" alt="세번째 이미지"></a></li>
+        </ul>
+    </div>
+    <div style="display: flex;">
+        <button class="prev">prev</button>
+        <ul class="btnAll">
+            <li><button class="btn0">1</button></li>
+            <li><button class="btn1">2</button></li>
+            <li><button class="btn2">3</button></li>
+        </ul>
+        <button class="next">next</button>
+    </div>
+    <script>
+
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const container = document.querySelector('.container');
+        const btnAll = document.querySelectorAll('.btnAll > li');
+        let index = 0;
+
+        prevBtn.addEventListener('click', () => {
+            if(index === 0){
+                return;
+            }
+            index -= 1;
+            updateCarousel(index);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if(index === 2){
+                return;
+            }
+            index += 1;
+            updateCarousel(index);
+        });
+
+        btnAll.forEach((btn, i) => {
+            document.querySelector(`.btn${i}`).addEventListener('click', () => {
+                updateCarousel(i);
+                index = i;
+            });
+        }); 
+
+        function updateCarousel(j){
+            container.style.transform = `translate(-${100 * j}vw)`;
+        }
+        
+    </script>
+</body>
+</html>

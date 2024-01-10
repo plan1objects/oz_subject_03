@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <title>회원가입</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #join{
+            background-color: #f2fee9;
+            width: 500px;
+            margin: 100px auto;
+            text-align: center;
+            padding: 130px 50px;
+            border-radius: 30px;
+            box-shadow: 10px 10px #a4d09a, 20px 20px #f9b865, 30px 30px #537c55, 40px 40px #fa6a6a;
+        }
+        #join > h1{
+            margin-bottom: 30px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 700;
+            font-size: 30px;
+        }
+        #join input,
+        #join button,
+        #join select{
+            font-size: 16px;
+            font-weight: bold;
+        }
+        input:not([type="radio"]), select{
+            outline: none;
+            border: solid 3px #537c55;
+            border-radius: 5px;
+            line-height: 60px;
+            margin-bottom: 14px;
+            text-indent: 12px;
+            box-sizing: border-box;
+            height: 60px;
+        }
+        [name="email"],[name="name"],
+        [name="pw"],[type="submit"],
+        #pwConfirm, select{
+            display: block;
+            width: 100%;
+            background-color: #fff;
+        }
+        [name="select_area"]{
+            margin: 20px 0 36px;
+        }
+        #hpGroup{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #hpGroup input{
+            width: 26%;
+        }
+        #join .number{
+            text-align: right;
+        }
+        #numberSend, #numberCheck,
+        #join .number button{
+            display: inline-block;
+        }
+        #join .number button{
+            margin: 14px 0;
+            width: 150px;
+            text-align: center;
+            line-height: 30px;
+        }
+        [type="radio"]{
+            accent-color: #537c55;
+        }
+        [type="submit"]{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!--챌린지4 코드위에 스타일링 하겠습니다-->
+    <section id="join">
+        <h1>OZ초격차 회원가입</h1>
+        <form id="form">
+            <input type="email" placeholder="이메일을 입력해주세요." name="email">
+            <input type="text" placeholder="이름을 입력해주세요." name="name">
+            <input type="password" placeholder="비밀번호를 입력해주세요." name="pw">
+            <input type="password" placeholder="비밀번호를 다시 입력해주세요." id="pwConfirm">
+            <p id="hpGroup">
+                <input type="text" name="hpFirst" placeholder="010">-<input type="text" name="hpMiddle" placeholder="1234">-<input type="text" name="hpLast" placeholder="5678">
+            </p>
+            <div class="number">
+                <p id="numberSend">000000</p>
+                <button type="button">인증번호 전송</button>
+            </div>    
+            <div class="number">
+                <p id="numberCheck">3:00</p>
+                <button type="button" disabled>인증확인</button> 
+            </div>  
+            <select name="select_area">
+                <optgroup label="서울시">
+                    <option value="none" selected>-지역을 선택하세요-</option>
+                    <option value="jongno">종로구</option>
+                    <option value="jung">중구</option>
+                    <option value="yongsan">용산구</option>
+                    <option value="seongdong">성동구</option>
+                    <option value="gwangjin">광진구</option>
+                </optgroup>
+                <optgroup label="경기도">
+                    <option value="suwon">수원시</option>
+                    <option value="yongin">용인시</option>
+                    <option value="seongnam">성남시</option>
+                    <option value="ansan">안산시</option>
+                    <option value="anyang">안양시</option>
+                </optgroup>
+            </select>
+            <input type="radio" id="woman" name="fm" value="woman" checked>
+            <label for="woman">여성</label>
+            <input type="radio" id="man" name="fm" value="man">
+            <label for="man">남성</label>
+            <input type="submit" id="send" value="가입하기">
+        </form>
+    </section>
+    <script>
+        
+    </script>
+</body>
+</html>
