@@ -80,7 +80,7 @@
         });
 
         btnAll.forEach((btn, i) => {
-            document.querySelector(`.btn${i}`).addEventListener('click', () => {
+            btn.addEventListener('click', () => {
                 updateCarousel(i);
                 index = i;
             });
