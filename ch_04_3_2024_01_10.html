@@ -127,10 +127,15 @@
     </section>
     <script>
 
-        
-        
+        const myobj = {}
 
-        
+        document.getElementById('send').addEventListener('click', () => {
+            document.querySelectorAll("#form [name]").forEach((el, i) => {
+                console.log(el.value);
+                myobj[el.name] = el.value;
+            });
+            console.log(myobj);   
+        });
 
     </script>
 </body>

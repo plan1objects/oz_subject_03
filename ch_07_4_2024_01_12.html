@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+        }
+        h1{
+            line-height: 100px;
+        }
+        #userGuess{
+            display: inline-block;
+            line-height: 30px;
+            margin: 20px 10px;
+            text-align: center;
+        }
+        #btn{
+            display: inline-block;
+            line-height: 30px;
+            padding: 0 30px;
+            background-color: #333;
+            border: solid 3px #ffa500;
+            color: #ffa500;
+            border-radius: 10px;
+        }
+        #btn:hover{
+            transform: scale(1.2);
+            box-shadow: 0 5px 5px #fdca6b;
+        }
+        #hint{
+            line-height: 40px;
+        }
+        #btn2{
+            display: inline-block;
+            line-height: 30px;
+            padding: 0 30px;
+            background-color: #333;
+            border: solid 3px #00a2ff;
+            color: #00a2ff;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            display: none;
+        }
+        #btn2 span{
+            position: absolute;
+            background-color: #00a2ff;
+            border-bottom: 0;
+            width: 40%;
+            display: block;
+            height: 0;
+            border-radius: 50%;
+            bottom: -14px;
+            z-index: 1;       
+        }
+        #btn2 span:nth-child(1){
+            left: -2px;
+            transition: height .4s 0s linear;
+        }
+        #btn2 span:nth-child(2){
+            left: 33.3333%;
+            transition: height .4s .1s linear;
+        }
+        #btn2 span:nth-child(3){
+            left: 66.6666%;
+            transition: height .4s .2s linear;
+        }
+        #btn2 strong{
+            position: relative;
+            z-index: 99;
+        }
+        #btn2:hover span{
+           height: 60px;  
+        }
+        #btn2:hover strong{
+            color: #333;         
+        }
+</style>
+</head>
+<body>
+    <h1>Mystery Number 맞추기</h1>
+    <p>1부터 100사이의 숫자를 입력하세요!</p>
+    <input type="text" id="userGuess">
+    <button id="btn" onclick="checkGuess()">뚜둥!</button>
+    <p id="hint"></p>
+    <button id="btn2">
+        <span></span>
+        <span></span>
+        <span></span>
+        <strong>다시하기</strong>
+    </button>
+    
+    <script>
+    
+    let secretNumber = Math.floor(Math.random() * 100) + 1;
+    const resetBtn = document.getElementById('btn2');
+    
+    function checkGuess(){
+        let userNumber = document.getElementById('userGuess').value;
+
+        if(secretNumber > userNumber){
+            document.getElementById('hint').innerHTML = '힌트 : 숫자가 너무 작아요! 조금 더 높여 보세요';
+        }else if(secretNumber < userNumber){
+            document.getElementById('hint').innerHTML = '힌트 : 숫자가 커요! 줄여볼까요?';
+        }else{
+            alert('좀 잘 찍네! 정답!');
+            resetBtn.style.display = 'inline-block';
+        }
+    }
+
+    resetBtn.addEventListener('click', () => {
+        secretNumber = Math.floor(Math.random() * 100) + 1;
+        document.getElementById('userGuess').value = '';
+        resetBtn.style.display = 'none';
+    });
+    
+
+    </script>
+</body>
+</html>
