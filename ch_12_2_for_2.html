@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>구구단</title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      #gugudan{
+        max-width: 800px;
+        text-align: center;
+      }
+      table, td, th{
+        border: solid 1px #333;
+      }
+      td, th{
+        padding: 5px;
+      }
+  </style>
+  </head>
+  <body>
+    
+    <table id="gugudan">
+      <tr id="thead"></tr>
+      <tr id="tbody"></tr>
+    </table>
+
+    <script>
+      const thead = document.querySelector('#thead');
+      const tbody = document.querySelector('#tbody');
+      let inner = '';
+      
+      for (let i = 2; i <= 9; i++) {
+        thead.innerHTML += `<th>${i}단</th>`;
+      }
+      for (let i = 2; i <= 9; i++) {
+        inner += `<td>`;
+        for (let j = 1; j <= 9; j++) {
+          inner += `${i} x ${j} = ${i * j}<br>`;
+        }
+        inner += `</td>`;
+      }
+      tbody.innerHTML = inner;
+    
+    </script>
+  </body>
+</html>

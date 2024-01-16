@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Date</title>
+  </head>
+  <body>
+    <div id="wrap">
+        <h2 id="currentTime"></h2>
+        <h2 id="timer"></h2>
+    </div>
+    <script>
+     function RemainingTime(targetDate) {
+        const now = new Date();
+        const endDate = new Date('2024-12-31T23:59:59').getTime();
+        const timeRemaining = endDate - now;
+    
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+        
+        document.querySelector('#currentTime').innerHTML = `현재 시간 : ${now}`;
+        document.querySelector('#timer').textContent = `올해의 남은 시간 : ${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남았습니다.` ;
+}
+ 
+setInterval(() => {
+    RemainingTime();
+}, 1000);
+    </script>
+  </body>
+</html>

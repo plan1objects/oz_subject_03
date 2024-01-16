@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calc</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html{
+            font-size: 16px;
+        }
+        ul{
+            list-style: none;
+        }
+        #container{
+            background-color: #f9e6b1;
+            max-width: 20rem;
+            padding: 20px 10px;
+        }
+        #pane{
+            display: block;
+            margin: 10px auto;
+            line-height: 50px;
+            width: 80%;
+            border: 0;
+            border-radius: 10px;
+            text-align: right;
+            font-size: 1.6rem;
+            background-color: #fff;
+            padding-right: 10px;
+        }
+        #numberPad{
+            font-weight: bold;
+            font-size: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            text-align: center;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        #numberPad > li{
+            width: calc(25% - 10px);
+            line-height: 4rem;
+            background-color: #ffbb00;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #numberPad > li.bg_r{
+            background-color: #ab1616;
+            color: #fff;
+        }
+        #numberPad > li.clearBtn,
+        #numberPad > li.clacBtn{
+            background-color: #1eab16;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="pane">0</div>
+        <ul id="numberPad">
+            <li class="num">1</li>
+            <li class="num">2</li>
+            <li class="num">3</li>
+            <li class="operator bg_r">+</li>
+            <li class="num">4</li>
+            <li class="num">5</li>
+            <li class="num">6</li>
+            <li class="operator bg_r">-</li>
+            <li class="num">7</li>
+            <li class="num">8</li>
+            <li class="num">9</li>
+            <li class="operator bg_r">*</li>  
+            <li class="clearBtn">AC</li>
+            <li class="num">0</li>
+            <li class="calcBtn">=</li>
+            <li class="operator bg_r">/</li>
+        </ul>
+    </div>  
+
+    <script>
+    
+    let data = '';
+
+    document.querySelector('#numberPad').addEventListener('click',(e)=>{
+        switch(e.target.innerText){
+            case "AC":
+                data = '';
+                document.querySelector('#pane').innerText = '0';
+                break;
+            case "=":
+                document.querySelector('#pane').innerText = calc(data);
+                data = ''
+                break;
+            default:
+                if(!(data == '' && e.target.innerText == '0')){
+                    data += ''+e.target.innerText;
+                    document.querySelector('#pane').innerText = data;
+                }
+                break;
+        }
+    });
+
+    function calc(data){
+        return eval(data);
+    }
+    </script>
+</body>
+</html>
