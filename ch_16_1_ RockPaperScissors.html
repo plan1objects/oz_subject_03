@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가위바위보</title>
+</head>
+<body>
+    <h1>가위바위보 게임</h1>
+    <p>가위 바위 보 중에 하나를 입력하세요</p>
+    <input type="text" id="inputTag">
+    <button id="checkBtn">결과 확인</button>
+    <p>
+        <span id="choice"></span>
+        <span id="computerChoice"></span>
+        <span id="result"></span>
+    </p>
+    <script>
+        const btn = document.querySelector('#checkBtn');
+        let userInput = document.querySelector('#inputTag');
+        let choice = document.querySelector('#choice');
+        let computer = document.querySelector('#computerChoice');
+        let result = document.querySelector('#result');
+        let computerChoice = 0;
+        const gamelist = ['가위','바위','보'];
+        let message = "";
+        let mychoice = 0;
+
+        btn.addEventListener('click', () => {
+            
+            computerChoice = Math.floor(Math.random() * 3);
+            
+            switch(userInput.value){
+            case ("가위"):
+                mychoice = 0;  
+                break;
+            case ("바위"):
+                mychoice = 1;  
+                break;
+            case ("보"):
+                mychoice = 2; 
+                break;
+            default:
+                 alert('다시 입력하세요');
+            }
+            
+            if( mychoice == computerChoice ){
+                message = "비겼습니다"   
+            }else{
+                if(mychoice === 0){
+                    message = computerChoice === 2 ? "유저가 이겼습니다." : "컴퓨터가 이겼습니다.";
+                }
+                if(mychoice === 1){
+                    message = computerChoice === 0 ? "유저가 이겼습니다." : "컴퓨터가 이겼습니다.";
+                }
+                if(mychoice === 2){
+                    message = computerChoice === 1 ? "유저가 이겼습니다." : "컴퓨터가 이겼습니다.";
+                }
+            }
+            choice.innerHTML = `당신의 선택 : ${userInput.value} / `;
+            computer.innerHTML = `컴퓨터의 선택 : ${gamelist[computerChoice]} / `;
+            result.innerHTML = `${message}`;
+        });
+
+      
+        
+
+
+
+
+    </script>
+</body>
+</html>

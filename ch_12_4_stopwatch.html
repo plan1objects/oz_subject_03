@@ -2,49 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스톱워치</title>
+    <title>Document</title>
 </head>
 <body>
-    <h1>스톱워치</h1>
-    <p id="timer">0:0:0</p>
-    <div id="btn_gr">
-        <button id="start" onclick="startClock()">시작</button>
-        <button id="stop" onclick="stopClock()">멈춤</button>
-        <button id="reset" onclick="resetClock()">리셋</button>
+    <div id="tictac">
+         ⏰<span>0:0:0</span>⏰
     </div>
-
+    <button class="stopbtn">스톱</button>
+    <button class="startagainbtn" >시작</button>
+    <button class="resetbtn">리셋</button>
     <script>
-        let time = document.querySelector('#timer');
-        let ms = 0, s = 0, m = 0;
-        let timer;
-        
-        function startClock(){
-            timer =  setInterval(timeset, 10);
-        }
-        
-        function stopClock(){
-            clearInterval(timer);
-        }
-
-        function resetClock(){
-            clearInterval(timer);
-            ms = 0, s = 0, m = 0;
-            time.innerHTML = '0:0:0';
-        }
-           
-        function timeset(){
-            ms++;
-            if(ms >= 100){
-                ms = 0;
-                s++;
+        const myobj = {
+            starttime : 0,
+            minutes : 0,
+            seconds : 0,
+            milliseconds : 0,
+            isPause : false,
+            startbtn : "",
+            timeSpan : document.querySelector("#tictac span"),
+            start : function(){
+                    
+                if(!this.isPause){
+                    this.isPause = true;         
+                    this.startbtn =  setInterval(() => {
+                        this.starttime += 10;                        
+                        this.minutes = Math.floor(this.starttime / (60 * 1000)); //1초는 1000 1초가 60개 곱하니깐 분
+                        this.seconds = Math.floor((this.starttime % (60 * 1000)) / 1000); //분으로 나눈 나머지이니깐 초
+                        this.milliseconds = (this.starttime % 1000).toString().padStart(3, '0').slice(0, 2);
+                        // 3자리로 표현하는 밀리초를 3자리 강제로 문자화 한 후에 앞에서 2자리까지만 출력
+                        // 천으로 나누었을때의 나머지를 구해야 하는데 딱 떨어지거나 해서 자리가 안 맞을 때를 대비해서
+                        // 문자로라도 0을 채워서라도 3자리고 강제로 만들고 앞에서 2자리까지 자라서 표현
+                        this.timeSpan.innerHTML = `${this.minutes}:${this.seconds}:${this.milliseconds}`;
+                    }, 10);
+                }    //초뒤의 2자리를 계산해야하므로 분 : 초 : 0.00초 10/1000 ( 셋인터벌을 10으로 주기를 잡은 이유)     
+            },
+            stop : function(){
+                 this.isPause = false;
+                 clearInterval(this.startbtn); //메서드안의 변수를 서로 접근할 수 없으니 부모의 변수를 선언하고
+                 //메서드내부안에서 그 변수에 저장해서 메서드끼리 서로 상통하도록 함     
+            },
+            reset : function(){
+                this.isPause = false;
+                this.stop();
+                this.starttime = 0;
+                this.milliseconds = 0;
+                this.minutes = 0;
+                this.seconds = 0;
+                this.timeSpan.innerHTML = `${this.minutes}:${this.seconds}:${this.milliseconds}`;
+                //this로 부모의 변수에 접근해서 모든 메서드에게 영향을 주기 위한 글로벌변수 변경으로 보면됨
             }
-            if(s >= 60){
-                s = 0;
-                m++;
-            }
-            time.innerHTML = `${m}:${s}:${ms}`;
         }
+        
+        document.querySelector(".startagainbtn").addEventListener('click',() => {
+            myobj.start();
+        })
+        document.querySelector(".stopbtn").addEventListener('click',() => {
+            myobj.stop();
+        })
+        document.querySelector(".resetbtn").addEventListener('click',() => {
+            myobj.reset();
+        })
     </script>
 </body>
 </html>
