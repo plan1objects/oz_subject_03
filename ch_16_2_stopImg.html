@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #img_box{
+            width: 1280px;
+            height: 400px;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+     <div id="img_box">
+
+     </div>
+     <button id="stopBtn">그만~</button>
+     <script>
+        
+        const imgBox = document.querySelector('#img_box');
+        const stopBtn = document.querySelector('#stopBtn');
+        let count = 0;
+        let boolean = true;
+
+        let startBtn = setInterval(autoAni,500);
+        
+        stopBtn.addEventListener('click', () => {
+            if(boolean === true){
+                clearInterval(startBtn);
+                stopBtn.innerHTML = '다시!';
+                boolean = false;
+            }else if(boolean === false){
+                startBtn = setInterval(autoAni,500);
+                stopBtn.innerHTML = '그만~~~';
+                boolean = true;
+            }
+        });
+        
+        function autoAni(){
+                imgBox.style.background = `url(./img/img_0${[count]}.jpg)`;
+                count++;
+                count = count % 3;
+            }  
+     </script>
+</body>
+</html>
