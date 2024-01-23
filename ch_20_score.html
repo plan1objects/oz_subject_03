@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        table, th, td{
+            border:solid 1px #000;
+        }
+    </style>
+</head>
+<body>
+    <h2>떡잎 유치원 멀리뛰기 결과</h2>
+    <table>
+        <th>이름</th>
+        <th>점수</th>
+        <tr>
+            <td>짱구</td>
+            <td class="score"></td>
+        </tr>
+        <tr>
+            <td>맹구</td>
+            <td class="score"></td>
+        </tr>
+        <tr>
+            <td>철수</td>
+            <td class="score"></td>
+        </tr>
+        <tr>
+            <td>훈이</td>
+            <td class="score"></td>
+        </tr>
+        <tr>
+            <td>유리</td>
+            <td class="score"></td>
+        </tr>
+        <tr>
+            <td>수지</td>
+            <td class="score"></td>
+        </tr>
+    </table>
+
+    <h2>75점이 넘는 사람</h2>
+    <ul></ul>
+
+    <button onclick="generateRandomScores()">새로운 점수 생성</button>
+
+    <script>
+        const scores = document.querySelectorAll(".score");
+
+        function displayScorers() {
+            const highScorersList = document.querySelector("ul");
+            const rows = document.querySelectorAll("table tr");
+
+            rows.forEach((row) => {
+                const name = row.querySelector("td:first-child")?.textContent;
+                const score = parseInt(row.querySelector(".score")?.textContent);
+
+                if (score > 75) {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `${name}: ${score}`;
+                    highScorersList.appendChild(listItem);
+                }
+            });
+        }
+
+        function generateRandomScores() {
+            scores.forEach((score) => {
+                const randomNum = Math.floor(Math.random() * (100 - 30 + 1)) + 30;
+                score.textContent = randomNum;
+            });
+
+            // Clear previous high scorers
+            document.querySelector("ul").innerHTML = "";
+
+            // Display new high scorers
+            displayScorers();
+        }
+
+        // Initial score generation
+        generateRandomScores();
+    </script>
+</body>
+</html>
