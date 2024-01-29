@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./images/oz_icon.png" />
+    <title>오즈코딩스쿨 | 카운트다운 타이머</title>
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background: linear-gradient(to right, #9674ba, #925cff);
+        color: #fff;
+        margin: 0;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      header {
+        font-size: 28px;
+        text-align: center;
+      }
+
+      #timer {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+
+      .time-unit {
+        margin: 0 10px;
+        text-align: center;
+      }
+
+      .time-unit > span {
+        display: block;
+        min-width: 60px;
+        font-size: 40px;
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .time-text {
+        transition: opacity 0.3s ease;
+        opacity: 1;
+      }
+
+      /* 애니메이션 효과 추가 */
+      .time-text.fade-effect {
+        opacity: 0;
+      }
+
+      .time-unit .label {
+        margin-top: 5px;
+        font-size: 16px;
+      }
+
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background: hsl(266, 38%, 50%);
+        font-size: 14px;
+        text-align: center;
+        padding: 50px 0;
+      }
+
+      .footer a {
+        color: hsl(282, 100%, 21%);
+        text-decoration: none;
+      }
+
+      /* 반응형 디자인 */
+      @media (max-width: 600px) {
+        header {
+          font-size: 20px;
+          text-align: center;
+        }
+        .time-unit > span {
+          min-width: 40px;
+          font-size: 24px;
+        }
+
+        .time-unit {
+          margin: 0 6px;
+        }
+
+        .time-unit .label {
+          font-size: 12px;
+        }
+        .footer {
+          font-size: 12px;
+          margin-top: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header><h1>카운트 다운</h1></header>
+
+      <div id="timer">   
+      </div>
+
+    <div class="footer">
+      © 2024. <a href="https://ozcodingschool.com/" target="_blank">ozcodingschool</a>. All rights
+      reserved. Developed by <a href="#">김우주</a>.
+    </div>
+
+    <script>
+      function updateTimer() {
+      const future = Date.parse("2024/06/25 00:00:00");
+      const now = new Date();
+      const diff = future - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const mins = Math.floor(diff / (1000 * 60));
+      const secs = Math.floor(diff / 1000);
+
+      const d = days;
+      const h = hours - days * 24;
+      const m = mins - hours * 60;
+      const s = secs - mins * 60;
+
+      document.getElementById("timer")
+      .innerHTML =
+      `<div class="time-unit"><span><span class="time-text" id="days">${d}</span></span><span class="label">Days</span></div>
+      <div class="time-unit"><span><span class="time-text" id="hours">${h}</span></span><span class="label">Hours</span></div>
+      <div class="time-unit"><span><span class="time-text" id="minutes">${m}</span></span><span class="label">Minutes</span></div>
+      <div class="time-unit"><span><span class="time-text" id="seconds">${s}</span></span><span class="label">Seconds</span></div>`
+   }
+
+        setInterval(updateTimer, 1000);
+
+    </script>
+  </body>
+</html>
